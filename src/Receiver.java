@@ -70,6 +70,10 @@ public class Receiver {
                     }
                     fileBytes = new DatagramPacket(bytearray, bytearray.length);
                 }
+                else if(window.packetExistsInWindowWithAck(receivedPacket.seqNo)) {
+                    byte[] seqBytes = intToBytes(receivedPacket.seqNo);
+                    socket.send(new DatagramPacket(seqBytes, seqBytes.length, clientAddress, clientPort));
+                }
             }
             else {
                 System.out.println("Packet loss, sequence number = " + receivedPacket.seqNo);

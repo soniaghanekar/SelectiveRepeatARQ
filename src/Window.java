@@ -37,4 +37,12 @@ public class Window {
         packetList = new Packet[maxSize];
         windowSize = 0;
     }
+
+    public boolean packetExistsInWindowWithAck(int seqNo) {
+        for(int i=0; i<maxSize; i++) {
+            if(packetList[i] != null && packetList[i].seqNo == seqNo && packetList[i].acknowledged == true)
+                return true;
+        }
+        return false;
+    }
 }
