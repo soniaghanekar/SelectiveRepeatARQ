@@ -123,7 +123,7 @@ public class Sender {
         byte[] buf = packet.dataWithSeqNo();
         DatagramPacket dgram = new DatagramPacket(buf, buf.length, serverAddress, serverPort);
         socket.send(dgram);
-        socket.setSoTimeout(1000);
+        socket.setSoTimeout(3000);
     }
 
     private void sendInt(int mss) {

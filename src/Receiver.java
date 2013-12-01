@@ -63,7 +63,8 @@ public class Receiver {
 
                     if(window.windowSize == window.maxSize || count >= fileSize) {
                         for(int i=0; i<window.windowSize; i++) {
-                           printWriter.print(new String(window.packetList[i].data));
+                            if(window.packetList[i] != null)
+                                printWriter.print(new String(window.packetList[i].data));
                         }
                         window.clear();
                         seqStart += window.maxSize;
