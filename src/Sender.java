@@ -33,7 +33,10 @@ public class Sender {
 
         sender.sendInt(mss);
         sender.sendInt(N);
+        long startTime = System.currentTimeMillis();
         sender.sendFile(args[2], N, mss);
+        long endTime = System.currentTimeMillis();
+        System.out.println("Time taken = " + (endTime-startTime)/1000);
         sender.socket.disconnect();
         sender.socket.close();
 
@@ -123,7 +126,7 @@ public class Sender {
         byte[] buf = packet.dataWithSeqNo();
         DatagramPacket dgram = new DatagramPacket(buf, buf.length, serverAddress, serverPort);
         socket.send(dgram);
-        socket.setSoTimeout(3000);
+        socket.setSoTimeout(1000);
     }
 
     private void sendInt(int mss) {

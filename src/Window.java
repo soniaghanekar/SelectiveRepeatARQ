@@ -38,11 +38,9 @@ public class Window {
         windowSize = 0;
     }
 
-    public boolean packetExistsInWindowWithAck(int seqNo) {
-        for(int i=0; i<maxSize; i++) {
-            if(packetList[i] != null && packetList[i].seqNo == seqNo && packetList[i].acknowledged == true)
-                return true;
-        }
+    public boolean packetExistsInWindowWithAck(int index) {
+        if(packetList[index]!=null && packetList[index].acknowledged == true)
+            return true;
         return false;
     }
 }

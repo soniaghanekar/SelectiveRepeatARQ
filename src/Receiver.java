@@ -71,7 +71,9 @@ public class Receiver {
                     }
                     fileBytes = new DatagramPacket(bytearray, bytearray.length);
                 }
-                else if(window.packetExistsInWindowWithAck(receivedPacket.seqNo)) {
+                else if(receivedPacket.seqNo < seqStart ||
+                        seqStart <= receivedPacket.seqNo && window.packetExistsInWindowWithAck(receivedPacket.seqNo-seqStart)) {
+                    System.out.println("Resending ack for " + receivedPacket.seqNo);
                     byte[] seqBytes = intToBytes(receivedPacket.seqNo);
                     socket.send(new DatagramPacket(seqBytes, seqBytes.length, clientAddress, clientPort));
                 }
